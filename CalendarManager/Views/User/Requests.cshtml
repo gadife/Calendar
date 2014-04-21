@@ -1,0 +1,69 @@
+﻿@using CalendarManager.Models
+@using CalendarManager.Helpers
+@model Dictionary<ReturnUser,List<TempEvent>>
+@{
+    Layout = "../Shared/_Layout.cshtml";   
+}
+@section scripts
+{
+    @Scripts.Render("~/Scripts/time_fixer.js")
+    @Scripts.Render("~/Scripts/requests.js")
+    @Styles.Render("~/Content/requests.css")
+}
+
+@foreach (var request in Model)
+{
+    <div class="request container @request.Value.First().RequestId">
+        <p class="new_request"><strong>@request.Key.Name ( @request.Key.Email ) has sent you new meeting request </strong> </p>
+
+        <div id="meta_data col-lg-5 well">
+            <table id="">
+                <tr>
+                    <td>Title</td>
+                    <td>@request.Value.First().Title</td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>@request.Value.First().Location</td>
+                </tr>
+                <tr>
+                    <td>Descreption</td>
+                    <td>@request.Value.First().Desc</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table col-lg-5">
+            <table class="table">
+                <tr>
+                    <td>Start</td>
+                    <td>End</td>
+                    <td>Approve</td>
+                </tr>
+                @foreach (var e in request.Value)
+	            {
+		            <tr>
+                        <td class="time">@e.StartDate.ToJSFriendlyFormat()</td>
+                        <td class="time">@e.EndDate.ToJSFriendlyFormat()</td>
+                        <td>
+                            @using(Ajax.BeginForm("Approve",new AjaxOptions(){HttpMethod="POST",
+                                                                              OnBegin="disable_request_buttons('"+e.RequestId+"')",
+                                                                              OnSuccess = "clear_reuqests('" + e.RequestId + "')"
+                            }))
+                            {
+                                @Html.Hidden("id",e.Id)
+                                <button class="btn btn-success @e.RequestId" type="submit"> <!-- on click disable all the button with this class -->
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </button>
+                            }
+                        </td>
+		            </tr>
+	            }
+            </table>
+        </div>
+    </div>
+}
+
+
+
+

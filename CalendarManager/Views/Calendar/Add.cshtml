@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "../Shared/_Layout.cshtml";   
+}
+@section scripts
+{
+    @Scripts.Render("~/Scripts/add_event.js")
+    @Scripts.Render("~/Scripts/time_fixer.js")
+    @Scripts.Render("~/Scripts/bootstrap-tagsinput.js")
+    @Scripts.Render("~/Scripts/fullcalendar.js")
+    @Scripts.Render("~/Scripts/moment.js")
+    @Scripts.Render("~/Scripts/bootstrap-datetimepicker.js")
+    @*Scripts.Render("~/Scripts/bootstrap-switch.js")*@
+
+    @Styles.Render("~/Content/bootstrap-tagsinput.css") 
+    @Styles.Render("~/Content/add_event.css") 
+    @Styles.Render("~/Content/fullcalendar.css")
+    @Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+    @*Styles.Render("~/Content/bootstrap-switch.css")*@
+}
+
+@using (Ajax.BeginForm("GetBusyTimes", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "show_result(data)", OnBegin = "start_claculate()" }))
+{ 
+    <input type="hidden" name="gmtOffset" id="gmtOffset"/>
+    
+    <div id="meeting_info" class="well">
+        <p style="margin-left:20px">
+            Add the emails that participants in the events.
+        </p>
+        <input data-role="tagsinput" name="users" id="users"/>
+        <br />
+        <font size="2">After each email press enter.</font>
+
+        <br /><br />
+
+        Meeting durartion in hours :
+       <input type="number" step="any" name="duration" value="1" /> 
+
+        <br /><br />
+
+        <div id="calculate">
+            <button type="submit" class="btn btn-success" value="Calculate" id="calc_btn">
+                Calculate &nbsp
+                <span class="glyphicon glyphicon-calendar"></span>
+            </button>
+            <img id="loading_gif" src="../img/loading-transparent.gif" />
+        </div>
+    </div>
+}
+
+<div id="meetings_content" style="width:950px">
+</div>

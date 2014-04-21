@@ -1,0 +1,47 @@
+﻿@using CalendarManager.Models
+@model List<CalendarManager.Models.StaffMember>
+@{
+    Layout = "../Shared/"+ViewBag.Layout+".cshtml";   
+}
+@section scripts
+{
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/about.css" rel="stylesheet" />
+
+}
+
+<div class="container"> 
+
+    @foreach (StaffMember member in Model)
+    {
+        <div class="col-lg-5">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object dp img-circle" src="../img/Profiles/@member.PictureFileName" style="width: 100px;height:100px;">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">@member.FullName <small> @member.Location</small></h4>
+                <h5>@member.Description @if(member.Company!=null){ <text>at</text> <a href="@member.Company.Item2">@member.Company.Item1</a>}</h5>
+                
+                <hr style="margin:8px auto">
+                
+                <div class="social-network">
+                    @foreach (var network in member.SocialNetwroks)
+	                {
+		                <a class="btn btn-@network.Key.ToString().ToLower()" href="@network.Value"><i class="icon-@network.Key.ToString().ToLower()"></i></a>
+	                }
+                </div>
+
+                <div class="tags">
+                    @foreach (var tag in member.Tags)
+	                {
+		                <span class="label label-default">@tag</span>
+	                }
+                </div>
+
+            </div>
+        </div>
+    </div>
+    }
+
+</div>

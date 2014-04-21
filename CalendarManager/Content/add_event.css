@@ -1,0 +1,33 @@
+﻿#meetings_content {
+    width:950px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.bootstrap-tagsinput {
+    width:75%;
+}
+
+#loading_gif {
+    display:none;
+}
+
+#toPopup {
+    height:50%;
+    top: 5%;
+}
+
+div#popup_content {
+    -ms-flex-align:baseline; /* IE 10 */
+    -moz-box-align:baseline; /* Firefox */
+    -webkit-box-align:baseline; /* Safari, Opera, and Chrome */
+    box-align:baseline; /* W3C */
+
+    margin-top:5%;
+}
+
+#description {
+    height:100px;
+    width:200px;
+    resize: none;
+}

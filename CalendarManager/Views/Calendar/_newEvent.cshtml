@@ -1,0 +1,67 @@
+﻿@model Tuple<string,string,bool>
+
+<script type="text/javascript">
+    $(function () {
+        $('#start_datetimepicker').datetimepicker({
+            language: 'en',
+        });
+        $('#end_datetimepicker').datetimepicker({
+            language: 'en',
+        });
+        
+        $('#start_datetimepicker').data("DateTimePicker").setDate(new Date('@Model.Item1'));
+        $('#end_datetimepicker').data("DateTimePicker").setDate(new Date('@Model.Item2'));
+
+        //$('#allDay').bootstrapSwitch('setSizeClass', '');
+    });
+</script>
+
+<div>
+    <input type="hidden" name="gmtOffset" id="gmtOffset"/>
+    <table>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" id="title" name="title" /></td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td><input type="text" id="location" name="location" /></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><textarea id="description" name="description"></textarea></td>
+        </tr>
+        <tr>
+            <td>Start Time</td>
+            <td>
+                <div class="form-group">
+                    <div class='input-group date' id='start_datetimepicker'>
+                        <input type='text' class="form-control" data-format="DD/MM/YYYY HH:mm" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>End Time</td>
+            <td>
+                <div class="form-group">
+                    <div class='input-group date' id='end_datetimepicker'>
+                        <input type='text' class="form-control" data-format="DD/MM/YYYY HH:mm" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Is All Day</td>
+            <td><input type="checkbox" id="allDay" name="allDay"  /></td>
+        </tr>
+    </table>
+    
+    <br />
+    <input type="submit" value="Add" class="btn btn-success" onclick="add_event()" />
+    <input type="button" value="Close" class="btn btn-info" onclick="disablePopup()" />
+</div>

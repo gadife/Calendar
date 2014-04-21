@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "../Shared/"+ViewBag.Layout+".cshtml";   
+}
+
+@using CalendarManager.Models;
+@model CheckboxValues
+
+@section scripts
+{
+    @Styles.Render("~/Content/fullcalendar.css")
+    @Scripts.Render("~/Scripts/fullcalendar.js")
+
+    @Scripts.Render("~/Scripts/time_fixer.js")
+
+    @Scripts.Render("~/Scripts/index.js")
+    @Styles.Render("~/Content/index.css") 
+    
+    @Scripts.Render("~/Scripts/moment.js")
+    @Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+    @Scripts.Render("~/Scripts/bootstrap-datetimepicker.js")
+
+    <link href="~/Content/Index.css" rel="stylesheet" />
+}
+
+<script>
+    $(document).ready(function () {
+        var user_mail = '@(Model.UserEmail)';
+        var is_user_specifed = check_if_user_null(user_mail)
+
+        load_event_to_calendar(is_user_specifed);
+
+        $('.importer').change(function () {
+
+            //$(this).closest("form").ajaxForm();
+            $(this).closest("form").submit();
+        });
+    });
+
+    function check_if_user_null(user_mail) {
+        if (!user_mail) {
+            $('#popup_content').html('Please Specify the email of the user');
+            loadPopup();
+            return false
+        }
+        return true
+    }
+
+    function load_event_to_calendar(should_load_events) {
+        $('#calendar').html('');
+
+        var cal = $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: should_load_events ? '@("/calendar/events/"+Model.UserEmail)' : [],
+            loading: function (bool) {
+                if (bool) {
+                    loadPopup();
+                    //loading();
+                } else {
+                    disablePopup(); 
+                    //closeloading();
+                }
+            },
+            defaultView: 'agendaWeek',
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end, allDay) {
+                add_new_date(start, end, allDay,'@Model.UserEmail');
+                cal.fullCalendar('renderEvent',
+						{
+						    start: start,
+						    end: end,
+						    allDay: allDay
+						},
+						true // make the event "stick"
+					);
+            },
+            editable: true,
+        });
+    }
+
+</script>
+
+<div class=""> 
+    <div id='calendar' style='width:@(Model.IsSelfView ? "90%" : "65%")'></div>
+
+    @if(!Model.IsSelfView)
+    {
+        <div id='add'>
+            <form action="javascript:void(0);" onsubmit="send_new_events()">
+                <input type="submit" class="btn btn-success" id="add_event" value="Add" /> <!-- onclick="send_new_events()"  -->
+                <img id="loading_gif" src="../img/loading-transparent.gif" style="display:none" />
+
+                <div id="meta_data">
+                    <table>
+                        <tr>
+                            <td>Title</td>
+                            <td><input type="text" id="title" required /></td>
+                            <td class="required_field">*</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td><input type="text" id="location" required /></td>
+                            <td class="required_field">*</td>
+                        </tr>
+                        <tr>
+                            <td>Your Mail</td>
+                            <td><input type="email" id="mail" required /></td>
+                            <td class="required_field">*</td>
+                        </tr>
+                        <tr>
+                            <td>Your Name</td>
+                            <td><input type="text" id="name" required /></td>
+                            <td class="required_field">*</td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td><textarea id="description" name="description" maxlength="99"></textarea></td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+
+            <div id="dates_div">
+                <table id='dates' class ="table">
+                    <thead>
+                        <tr>
+                            <th>Remove</th>
+                            <th>Start</th>
+                            <th>End</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

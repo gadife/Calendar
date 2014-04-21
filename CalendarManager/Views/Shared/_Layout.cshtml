@@ -1,0 +1,74 @@
+﻿@using CalendarManager.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/bootstrap")
+    @Styles.Render("~/Content/bootstrap")
+    <script src="~/Scripts/pop_up.js"></script>
+    <link href="~/Content/pop_up.css" rel="stylesheet" />
+    @Scripts.Render("~/Scripts/loged_on.js")
+    @Styles.Render("~/Content/loged_on.css")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+
+     <nav class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          @Html.ActionLink("Meetings and shit","Homepage","About",null,new {@class = "navbar-brand"})
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          @Html.MenuLink("My Meetings", "Index", "Calendar")
+          @Html.MenuLink("Add Meeting", "Add", "Calendar")
+          @Html.MenuLink("Requests", "Requests", "User",new {@id = "requests_count"} )
+          @Html.MenuLink("About", "About", "About")
+          <!--li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></!--a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li-->
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="pop_up_stuff">
+        <div id="toPopup">    	
+            <div class="close"></div>
+	        <div id="popup_content"> <h1>Loading</h1> </div>
+        </div>
+        <div class="loader"></div>
+        <div id="backgroundPopup"></div>
+    </div>
+
+    <div id="body">
+        @RenderBody()
+    </div>
+</body>
+<!--fotter>
+    <div class="navbar navbar-fixed-bottom alert alert-info"></div>
+</fotter-->
+</html>

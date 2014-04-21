@@ -1,0 +1,51 @@
+﻿#calendar {
+    width: 950px;
+    /*margin-left:auto;
+    margin-right:auto;*/
+    float: left;
+}
+
+#add {
+    float: left;
+    margin-left: 50px;
+    width: 500px;
+}
+
+#dates {
+    margin-top: 10px;
+}
+
+.end_time,
+.start_time {
+    display: none;
+}
+
+#description {
+    height: 100px;
+    width: 200px;
+    resize: none;
+}
+
+#title,
+#location,
+#mail,
+#name {
+    width: 200px;
+}
+
+.required_field {
+    color:red;
+    font-size:150%;
+}
+
+/* calendar */
+.fc-header,
+#calendar {
+    /*width:50%;*/
+    float:left;
+}
+
+#add {
+    width:30%;
+}
+

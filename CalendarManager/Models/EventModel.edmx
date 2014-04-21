@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EventsBbModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EventsBbModelStoreContainer">
+          <EntitySet Name="Events" EntityType="EventsBbModel.Store.Events" store:Type="Tables" />
+          <EntitySet Name="EventUsers" EntityType="EventsBbModel.Store.EventUsers" store:Type="Tables" />
+          <EntitySet Name="GmailProvider" EntityType="EventsBbModel.Store.GmailProvider" store:Type="Tables" />
+          <EntitySet Name="OutlookProvider" EntityType="EventsBbModel.Store.OutlookProvider" store:Type="Tables" />
+          <EntitySet Name="Providers" EntityType="EventsBbModel.Store.Providers" store:Type="Tables" />
+          <EntitySet Name="TempEvent" EntityType="EventsBbModel.Store.TempEvent" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="EventsBbModel.Store.Users" store:Type="Tables" />
+          <AssociationSet Name="EventUsers_Event_FK" Association="EventsBbModel.Store.EventUsers_Event_FK">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventUsers" EntitySet="EventUsers" />
+          </AssociationSet>
+          <AssociationSet Name="Outlook_Provider_FK" Association="EventsBbModel.Store.Outlook_Provider_FK">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="OutlookProvider" EntitySet="OutlookProvider" />
+          </AssociationSet>
+          <AssociationSet Name="User_Provider_FK" Association="EventsBbModel.Store.User_Provider_FK">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="USER_TEMP_EVENTS_FK" Association="EventsBbModel.Store.USER_TEMP_EVENTS_FK">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TempEvent" EntitySet="TempEvent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="EventId" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="IsAllDay" Type="bit" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="OrganizerMail" Type="nvarchar" MaxLength="100" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsReccurnce" Type="bit" />
+          <Property Name="FormattedLocation" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="EventUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="EventId" Type="bigint" Nullable="false" />
+          <Property Name="UserMail" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="GmailProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="user" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OutlookProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Providers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TempEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ReturnMail" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ReturmName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="RequestId" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Desc" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="IsAllDay" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="userName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="providerId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="EventUsers_Event_FK">
+          <End Role="Events" Type="EventsBbModel.Store.Events" Multiplicity="1" />
+          <End Role="EventUsers" Type="EventsBbModel.Store.EventUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventUsers">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Outlook_Provider_FK">
+          <End Role="Providers" Type="EventsBbModel.Store.Providers" Multiplicity="1" />
+          <End Role="OutlookProvider" Type="EventsBbModel.Store.OutlookProvider" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OutlookProvider">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Provider_FK">
+          <End Role="Providers" Type="EventsBbModel.Store.Providers" Multiplicity="1" />
+          <End Role="Users" Type="EventsBbModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="providerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USER_TEMP_EVENTS_FK">
+          <End Role="Users" Type="EventsBbModel.Store.Users" Multiplicity="1" />
+          <End Role="TempEvent" Type="EventsBbModel.Store.TempEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TempEvent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventsBbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EventsBbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="EventsBbModel.Event" />
+          <EntitySet Name="Users" EntityType="EventsBbModel.User" />
+          <EntitySet Name="Providers" EntityType="EventsBbModel.Provider" />
+          <AssociationSet Name="ProviderUser" Association="EventsBbModel.ProviderUser">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="EventUsers" EntityType="EventsBbModel.EventUser" />
+          <AssociationSet Name="EventEventUsers" Association="EventsBbModel.EventEventUsers">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="EventUsers" EntitySet="EventUsers" />
+          </AssociationSet>
+          <EntitySet Name="TempEvent" EntityType="EventsBbModel.TempEvent" />
+          <AssociationSet Name="TempEventUser" Association="EventsBbModel.TempEventUser">
+            <End Role="TempEvent" EntitySet="TempEvent" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="EventId" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="StartTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="EndTime" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
+          <NavigationProperty Name="EventUsers" Relationship="EventsBbModel.EventEventUsers" FromRole="Event" ToRole="EventUsers" />
+          <Property Type="DateTime" Name="LastUpdateTime" Precision="3" Nullable="false" />
+          <Property Type="String" Name="OrganizerMail" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Subject" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsReccurnce" />
+          <Property Type="String" Name="FormattedLocation" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="100" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Provider" Relationship="EventsBbModel.ProviderUser" FromRole="User" ToRole="Provider" />
+          <NavigationProperty Name="TempEvents" Relationship="EventsBbModel.TempEventUser" FromRole="User" ToRole="TempEvent" />
+        </EntityType>
+        <EntityType Name="GmailProvider" BaseType="EventsBbModel.Provider">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OutlookProvider" BaseType="EventsBbModel.Provider">
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="EventsBbModel.ProviderUser" FromRole="Provider" ToRole="User" />
+        </EntityType>
+        <Association Name="ProviderUser">
+          <End Type="EventsBbModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="EventsBbModel.User" Role="User" Multiplicity="1" />
+        </Association>
+        <EntityType Name="EventUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Approved" />
+          <NavigationProperty Name="Event" Relationship="EventsBbModel.EventEventUsers" FromRole="EventUsers" ToRole="Event" />
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="EventEventUsers">
+          <End Type="EventsBbModel.Event" Role="Event" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="EventsBbModel.EventUser" Role="EventUsers" Multiplicity="*" >
+          </End>
+        </Association>
+        <EntityType Name="TempEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Location" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReturnMail" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReturnName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RequestId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Desc" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="EventsBbModel.TempEventUser" FromRole="TempEvent" ToRole="User" />
+        </EntityType>
+        <Association Name="TempEventUser">
+          <End Type="EventsBbModel.TempEvent" Role="TempEvent" Multiplicity="*" >
+          </End>
+          <End Type="EventsBbModel.User" Role="User" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventsBbModelStoreContainer" CdmEntityContainer="EventsBbEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="IsTypeOf(EventsBbModel.Event)">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="FormattedLocation" ColumnName="FormattedLocation" />
+                <ScalarProperty Name="IsReccurnce" ColumnName="IsReccurnce" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="OrganizerMail" ColumnName="OrganizerMail" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EventsBbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserName" ColumnName="userName" />
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Email" ColumnName="email" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+                <ScalarProperty Name="Password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="IsTypeOf(EventsBbModel.Provider)">
+              <MappingFragment StoreEntitySet="Providers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EventsBbModel.OutlookProvider)">
+              <MappingFragment StoreEntitySet="OutlookProvider">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EventsBbModel.GmailProvider)" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+              <MappingFragment StoreEntitySet="GmailProvider">
+                <ScalarProperty Name="Password" ColumnName="password" />
+                <ScalarProperty Name="UserName" ColumnName="user" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProviderUser" TypeName="EventsBbModel.ProviderUser" StoreEntitySet="Users">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="id" />
+            </EndProperty>
+            <EndProperty Name="Provider">
+              <ScalarProperty Name="Id" ColumnName="providerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="EventUsers">
+            <EntityTypeMapping TypeName="EventsBbModel.EventUser">
+              <MappingFragment StoreEntitySet="EventUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Email" ColumnName="UserMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EventEventUsers" TypeName="EventsBbModel.EventEventUsers" StoreEntitySet="EventUsers" >
+            <EndProperty Name="EventUsers">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Event">
+              <ScalarProperty Name="Id" ColumnName="EventId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="TempEvent">
+            <EntityTypeMapping TypeName="EventsBbModel.TempEvent">
+              <MappingFragment StoreEntitySet="TempEvent">
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="ReturnName" ColumnName="ReturmName" />
+                <ScalarProperty Name="ReturnMail" ColumnName="ReturnMail" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TempEventUser" TypeName="EventsBbModel.TempEventUser" StoreEntitySet="TempEvent">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="TempEvent">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

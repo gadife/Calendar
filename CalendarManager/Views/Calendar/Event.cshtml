@@ -1,0 +1,52 @@
+﻿@using CalendarManager.Helpers
+@using CalendarManager.Models
+@model Event
+@{
+    Layout = "../Shared/_Layout.cshtml";   
+}
+@section scripts
+{
+    @Scripts.Render("~/Scripts/time_fixer.js")
+}
+
+<div id="event_info">
+    <div id="name" style="text-align:center">
+        <h1>@(Model.Subject)</h1>
+    </div>
+
+    <div id="location">
+        Location : @(Model.Location ?? "None")
+    </div>
+    <div id="event_time">
+        <div id="start_time">
+            Start Time : <div class="time" style="display:inline-block"> @Model.StartTime.ToJSFriendlyFormat()</div>
+        </div>
+        <div id="end_time">
+            End Time : <div class="time" style="display:inline-block"> @Model.EndTime.ToJSFriendlyFormat() </div>
+        </div>
+    </div>
+    <br />
+    <div id="event_users">
+        <table class="table">
+            <tr>
+                <th style="width:20px"></th>
+                <th>Email</th>
+                <th>Accepted</th>
+            </tr>
+            @foreach (var user in Model.EventUsers)
+            {
+                <tr>
+                    <td>@if(user.Email == Model.OrganizerMail)
+                            {<i class="icon-user"></i>}
+                    </td>
+                    <td>@user.Email</td>
+                    <td><i class="@(string.Format("icon-{0}",((user.Approved != null ? user.Approved.Value : false) || user.Email == Model.OrganizerMail) ? 
+                                                             "ok": "remove"))"></i>
+                </tr>
+            }
+        </table>
+    </div>
+    <div id="last_update_time">
+        Last Update Time : <div class="time" style="display:inline-block"> @Model.LastUpdateTime.ToJSFriendlyFormat() </div>
+    </div>
+</div>
