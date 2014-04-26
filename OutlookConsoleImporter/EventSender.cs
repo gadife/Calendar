@@ -58,9 +58,16 @@ namespace OutlookConsoleImporter
                 }
                 catch (WebException e)
                 {
-                    var resp = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
+                    if (e.Response != null)
+                    {
+                        var resp = new StreamReader(e.Response.GetResponseStream()).ReadToEnd();
 
-                    Console.WriteLine(resp);
+                        Console.WriteLine(resp);
+                    }
+                    else
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
 
