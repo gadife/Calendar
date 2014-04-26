@@ -32,28 +32,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DDay.Collections">
-      <HintPath>..\..\..\Outside\iCal\DDay.Collections.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\iCal\DDay.Collections.dll</HintPath>
     </Reference>
     <Reference Include="DDay.iCal">
-      <HintPath>..\..\..\Outside\iCal\DDay.iCal.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\iCal\DDay.iCal.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.AccessControl">
-      <HintPath>..\..\ConsoleApplication1\CalendarImporter\bin\Debug\Google.GData.AccessControl.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Calendar">
-      <HintPath>..\..\ConsoleApplication1\CalendarImporter\bin\Debug\Google.GData.Calendar.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.Calendar.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Client">
-      <HintPath>..\..\ConsoleApplication1\CalendarImporter\bin\Debug\Google.GData.Client.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.Client.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Extensions">
-      <HintPath>..\..\ConsoleApplication1\CalendarImporter\bin\Debug\Google.GData.Extensions.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAdapter">
-      <HintPath>..\..\ConsoleApplication1\CalendarImporter\bin\Debug\GoogleAdapter.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\Google Api\GoogleAdapter.dll</HintPath>
     </Reference>
     <Reference Include="GoogleHelpers">
-      <HintPath>..\..\ConsoleApplication1\CalendarImporter\bin\Debug\GoogleHelpers.dll</HintPath>
+      <HintPath>..\..\Dev\Outside\C#\Google Api\GoogleHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -75,6 +78,9 @@
     <Compile Include="IsarelCalendarImporter.cs" />
     <Compile Include="OutlookImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

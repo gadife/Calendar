@@ -22,7 +22,8 @@ namespace EventsImporter
 
         #region Ctor
 
-        public GmailImporter(string username, string password):base(username)
+        public GmailImporter(string username, string password)
+            : base(username)
         {
             m_username = username;
             m_password = password;
@@ -32,14 +33,14 @@ namespace EventsImporter
 
             m_calendarUri = new Uri("http://www.google.com/calendar/feeds/" + m_service.Credentials.Username + "/private/full");
         }
-        
+
         #endregion Ctor
 
         #region IEventImporter
 
         public override IEnumerable<EventDto> GetEvents(bool shouldTakeAllParticipents = false)
         {
-            var newEvents = GetAllGmailEvents().Where(e=>e.Times.First().EndTime >= DateTime.Now);
+            var newEvents = GetAllGmailEvents().Where(e => e.Times.First().EndTime >= DateTime.Now);
 
             foreach (var e in newEvents)
             {
@@ -55,7 +56,7 @@ namespace EventsImporter
             }
         }
 
-        public override void SendEvent(EventDto e,string subject = null)
+        public override void SendEvent(EventDto e, string subject = null)
         {
             AtomEntry entry = m_service.Insert(m_calendarUri, DtoToEntry(e));
         }
@@ -97,9 +98,9 @@ namespace EventsImporter
             {
                 Where location = new Where();
                 location.ValueString = dto.Location;
-                entry.Locations.Add(location); 
+                entry.Locations.Add(location);
             }
-           
+
             // Event time
             When eventTime = new When();
             eventTime.StartTime = dto.StartTime;

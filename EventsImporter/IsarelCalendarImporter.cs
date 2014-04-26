@@ -17,11 +17,12 @@ namespace EventsImporter
 
         #region Ctor
 
-        public IsarelCalendarImporter() : base(null)
+        public IsarelCalendarImporter()
+            : base(null)
         {
 
         }
-        
+
         #endregion Ctor
 
         #region IEventImporter
