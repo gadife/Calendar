@@ -31,29 +31,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DDay.Collections">
-      <HintPath>..\..\Dev\Outside\C#\iCal\DDay.Collections.dll</HintPath>
+    <Reference Include="DDay.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\iCal\DDay.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="DDay.iCal">
-      <HintPath>..\..\Dev\Outside\C#\iCal\DDay.iCal.dll</HintPath>
+    <Reference Include="DDay.iCal, Version=1.0.2.575, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\iCal\DDay.iCal.dll</HintPath>
     </Reference>
-    <Reference Include="Google.GData.AccessControl">
-      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.AccessControl.dll</HintPath>
+    <Reference Include="Google.GData.AccessControl, Version=1.4.0.2, Culture=neutral, PublicKeyToken=b4b8eb9a7afc8328, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Google\Google.GData.AccessControl.dll</HintPath>
     </Reference>
-    <Reference Include="Google.GData.Calendar">
-      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.Calendar.dll</HintPath>
+    <Reference Include="Google.GData.Calendar, Version=1.4.0.2, Culture=neutral, PublicKeyToken=aa6748391206b888, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Google\Google.GData.Calendar.dll</HintPath>
     </Reference>
-    <Reference Include="Google.GData.Client">
-      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.Client.dll</HintPath>
+    <Reference Include="Google.GData.Client, Version=1.4.0.2, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Google\Google.GData.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Google.GData.Extensions">
-      <HintPath>..\..\Dev\Outside\C#\Google Api\Google.GData.Extensions.dll</HintPath>
+    <Reference Include="Google.GData.Extensions, Version=1.4.0.2, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Google\Google.GData.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleAdapter">
-      <HintPath>..\..\Dev\Outside\C#\Google Api\GoogleAdapter.dll</HintPath>
+    <Reference Include="GoogleAdapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Google\GoogleAdapter.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleHelpers">
-      <HintPath>..\..\Dev\Outside\C#\Google Api\GoogleHelpers.dll</HintPath>
+    <Reference Include="GoogleHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Google\GoogleHelpers.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
