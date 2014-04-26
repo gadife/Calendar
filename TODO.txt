@@ -1,0 +1,4 @@
+* Seperate the implementation of the importer to seperated dlls 
+( it is wrong that the outlook console importer have the google api dlls )
+
+* Rewrite the server in Rails
