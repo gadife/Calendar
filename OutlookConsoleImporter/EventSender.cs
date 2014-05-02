@@ -43,9 +43,10 @@ namespace OutlookConsoleImporter
 
         public void Send(List<EventDto> events, long userId, string password)
         {
-            using (var wb = new WebClient())
+            using (var wb = new WebClientEx())
             {
-                //TODO : JSON
+                wb.Timeout = int.Parse(ConfigurationManager.AppSettings["timeout"]);
+
                 var data = new NameValueCollection();
                 data["userId"] = userId.ToString();
                 data["hashedPassword"] = password.ToString();

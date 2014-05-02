@@ -28,6 +28,7 @@ namespace OutlookConsoleImporter
             PrintMessage("Finish sending meetings to server");
 
             PrintMessage("Done");
+            Console.ReadLine();
         }
 
         private static void PrintMessage(string message)
