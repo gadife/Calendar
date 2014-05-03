@@ -29,6 +29,12 @@ namespace CalendarManager.Controllers
 
             return new EmptyResult();
         }
+
+        public ActionResult Logout()
+        {
+            Session[SessionNames.Email] = null;
+            return RedirectToAction("Index", "Calendar");
+        }
         
         #endregion Login
 

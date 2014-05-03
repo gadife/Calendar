@@ -60,6 +60,11 @@ namespace EventsImporter
 
         #region Private Methods
 
+        /// <summary>
+        /// Remove to another class ( for testing )
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         private string CreateIcsData(EventDto dto)
         {
             iCalendar ics = new iCalendar();
