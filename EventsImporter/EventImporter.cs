@@ -76,6 +76,9 @@ namespace EventsImporter
             ev.Name = dto.Name;
             ev.UID = Guid.NewGuid().ToString();
             ev.Description = "Created by the site";
+            ev.Location = dto.Location;
+            ev.Organizer = new Organizer(dto.Organizer);
+            ev.Attendees = dto.Attending.Select<Attending, IAttendee>(a => new Attendee(a.Email)).ToList();
 
             iCalendarSerializer seralizer = new iCalendarSerializer();
             return seralizer.SerializeToString(ics);
@@ -83,7 +86,7 @@ namespace EventsImporter
 
         private void SendAppitment(string data, string subject)
         {
-            
+
             System.Net.Mail.Attachment meeting = System.Net.Mail.Attachment.CreateAttachmentFromString(data, new ContentType("text/calendar"));
 
             using (MailMessage mail = new MailMessage("ericfeldman93@gmail.com", m_mail))

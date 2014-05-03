@@ -76,6 +76,7 @@ namespace CalendarManager.Helpers
                 Location = e.Location,
                 Description = e.Desc,
                 IsAllDay = e.IsAllDay,
+                Organizer = e.ReturnMail,
                 Attending = new List<Attending>()
                            {
                                new Attending(e.User.Email,true),
