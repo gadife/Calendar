@@ -50,7 +50,7 @@ namespace OutlookConsoleImporter
                 var data = new NameValueCollection();
                 data["userId"] = userId.ToString();
                 data["hashedPassword"] = password.ToString();
-                data["json"] = GetEvetnsJson(events);
+                data["events"] = GetEvetnsJson(events);
 
                 try
                 {

@@ -13,10 +13,10 @@ namespace EventsImporter
         public Attending(string email, bool approved)
         {
             Email = email;
-            Approved = approved;
+            IsApproved = approved;
         }
 
         public string Email { get; set; }
-        public bool Approved { get; set; }       
+        public bool IsApproved { get; set; }       
     }
 }

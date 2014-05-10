@@ -128,7 +128,7 @@ namespace EventsImporter
             praticipent.Attendee_Type = type;
 
             Who.AttendeeStatus staus = new Who.AttendeeStatus();
-            staus.Value = attending.Approved ? Who.AttendeeStatus.EVENT_ACCEPTED : Who.AttendeeStatus.EVENT_INVITED;
+            staus.Value = attending.IsApproved ? Who.AttendeeStatus.EVENT_ACCEPTED : Who.AttendeeStatus.EVENT_INVITED;
             praticipent.Attendee_Status = staus;
 
             return praticipent;
